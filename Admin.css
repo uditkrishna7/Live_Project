@@ -1,0 +1,129 @@
+﻿/* General styling for the body and full-page layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FEFF9F; /* Light yellow */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header styling */
+header {
+    background-color: #72BF78; /* Dark green */
+    padding: 15px;
+    text-align: center;
+}
+
+    header h1 {
+        margin: 0;
+        color: white;
+    }
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+    nav ul li {
+        display: inline;
+        margin: 0 10px;
+    }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            nav ul li a:hover {
+                text-decoration: underline;
+            }
+
+/* Main content area */
+main {
+    flex: 1; /* Allows the main content to take up all available space */
+    display: flex;
+    justify-content: center; /* Centers the form horizontally */
+    align-items: center; /* Centers the form vertically */
+    padding: 20px;
+}
+
+/* Form container */
+form {
+    background-color: #A0D683; /* Light green */
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for a modern look */
+}
+
+/* Input form elements */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 100%; /* Make input fields take full width */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Submit button */
+asp\:Button {
+    background-color: #72BF78;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Full-width button */
+    font-size: 16px;
+}
+
+    asp\:Button:hover {
+        background-color: #A0D683;
+    }
+
+/* Table styling for Admin GridView */
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .order-table th, .order-table td {
+        border: 1px solid #ccc;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .order-table th {
+        background-color: #72BF78;
+        color: white;
+    }
+
+/* Footer styling */
+footer {
+    background-color: #72BF78;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    margin-top: auto; /* Ensures footer is pushed to the bottom */
+}
+
+/* Make the layout responsive */
+@media screen and (max-width: 768px) {
+    form {
+        padding: 20px;
+        max-width: 90%;
+    }
+}
