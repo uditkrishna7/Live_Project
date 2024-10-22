@@ -1,41 +1,45 @@
 ﻿using System;
+using System.Data.SqlClient;
+using System.Configuration;
 using System.Web.UI;
+using System.CodeDom;
 
-namespace Ecommerce_Website
+public partial class Order : System.Web.UI.Page
 {
-    public partial class Order : Page
+    SqlConnection con = new SqlConnection(@"Data Source=HUMAYUN\SQLEXPRESS;Initial Catalog=srk;Integrated Security=True;");
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        protected void Page_Load(object sender, EventArgs e)
+        string querry = "INSERT INTO BoxOrders (BoxType, BoxSize, BoxColor, BoxQuantity, CustomerName, CustomerAddress, CustomerContact, DeliverDate, ModeOfPayment, TransactionId, CustomerNote) " +
+               "VALUES (@BoxType, @BoxSize, @BoxColor, @BoxQuantity, @CustomerName, @CustomerAddress, @CustomerContact, @DeliverDate, @ModeOfPayment, @TransactionId, @CustomerNote)";
+        using (SqlCommand cmd = new SqlCommand(querry, con))
         {
-        }
+            try
+            {
+                con.Open();
+                cmd.Parameters.AddWithValue("@BoxType", ddlBoxType.SelectedValue);
+                cmd.Parameters.AddWithValue("@BoxSize", txtSize.Text);
+                cmd.Parameters.AddWithValue("@BoxColor", boxColour.Text);
+                cmd.Parameters.AddWithValue("@BoxQuantity", int.Parse(txtQuantity.Text));
+                cmd.Parameters.AddWithValue("@CustomerName", txtCustomerName.Text);
+                cmd.Parameters.AddWithValue("@CustomerAddress", txtCustomerAddress.Text);
+                cmd.Parameters.AddWithValue("@CustomerContact", txtCustomerContact.Text);
+                cmd.Parameters.AddWithValue("@DeliverDate", DateTime.Parse(txtDeliveryDate.Text));
+                cmd.Parameters.AddWithValue("@ModeOfPayment", ddlPaymentMode.SelectedValue);
+                cmd.Parameters.AddWithValue("@TransactionId", txtTransactionId.Text);
+                cmd.Parameters.AddWithValue("@CustomerNote", txtCustomerNotes.Text);
+                int i = cmd.ExecuteNonQuery();
+                if (i >= 1)
+                {
+                    Response.Write("<script>alert('Order submitted successfully!');</script>");
+                }
+            }
+            catch (Exception)
+            {
+                Response.Write("<script>alert('Database error occurred.');</script>");
+            }
 
-        protected void SubmitOrder(object sender, EventArgs e)
-        {
-            //string name = txtName.Text;
-            //string contact = txtContact.Text;
-            //string address = txtAddress.Text;
-            //string boxType = ddlBoxType.SelectedValue;
-            //string boxColor = Request.Form["boxColor"]; // Get the color value
-            //int quantity = int.Parse(txtQuantity.Text);
-            //DateTime deliveryDate = DateTime.Parse(txtDeliveryDate.Text);
-            //string customerNotes = txtCustomerNotes.Text;
-
-            //// Create order summary
-            //string orderSummary = $"Order Summary:<br>" +
-            //                      $"Name: {name}<br>" +
-            //                      $"Contact: {contact}<br>" +
-            //                      $"Address: {address}<br>" +
-            //                      $"Box Type: {boxType}<br>" +
-            //                      $"Box Color: {boxColor}<br>" +
-            //                      $"Quantity: {quantity}<br>" +
-            //                      $"Delivery Date: {deliveryDate.ToShortDateString()}<br>" +
-            //                      $"Customer Notes: {customerNotes}<br>" +
-            //                      $"Please deposit 30% of the total order cost before delivery. " +
-            //                      $"You will see the prototype of your order after three days.";
-
-            //// Register a startup script to show the flash message
-            //string script = $"<script type='text/javascript'>showFlashMessage('{orderSummary}');</script>";
-            //ClientScript.RegisterStartupScript(this.GetType(), "ShowFlashMessage", script);
         }
     }
 }
+
