@@ -1,0 +1,17 @@
+CREATE DATABASE srk;
+USE srk;
+
+CREATE TABLE BoxOrders(
+    OrderId INT IDENTITY(1,1) PRIMARY KEY,          -- Unique identifier for each order
+    BoxType NVARCHAR(50) NOT NULL,                  -- Type of the box (e.g., cardboard, plastic)
+    BoxSize NVARCHAR(30) NOT NULL,                  -- Size of the box (e.g., small, medium, large)
+    BoxColor NVARCHAR(30) NOT NULL,                 -- Color of the box
+    BoxQuantity INT NOT NULL,                        -- Quantity of boxes ordered
+    CustomerName NVARCHAR(100) NOT NULL,            -- Name of the customer
+    CustomerAddress NVARCHAR(255) NOT NULL,         -- Address of the customer
+    CustomerContact NVARCHAR(15) NOT NULL,          -- Contact number of the customer
+    DeliverDate DATE NOT NULL,                       -- Delivery date
+    ModeOfPayment NVARCHAR(30) NOT NULL,            -- Mode of payment (e.g., credit card, cash)
+    TransactionId NVARCHAR(50),     -- Unique transaction identifier
+    CustomerNote NVARCHAR(MAX)                       -- Additional notes from the customer
+);
